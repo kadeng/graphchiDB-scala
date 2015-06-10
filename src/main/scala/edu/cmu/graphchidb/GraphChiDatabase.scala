@@ -58,7 +58,7 @@ object GraphChiDatabaseAdmin {
                      replaceExistingFiles:Boolean=false) : Boolean= {
     val graphName = new File(baseFilename).getName
     val directory = new File(baseFilename).getParentFile
-    if (!directory.exists()) directory.mkdir()
+    if (!directory.exists()) directory.mkdirs()
 
     if (!replaceExistingFiles && directory.listFiles(new FilenameFilter {
       def accept(dir: File, name: String) = name.contains(graphName)

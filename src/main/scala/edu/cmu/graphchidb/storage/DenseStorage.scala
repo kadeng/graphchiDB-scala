@@ -26,7 +26,11 @@ class MemoryMappedDenseByteStorageBlock(file: File, _size: Option[Long], element
     // println("Shard size was not as expected: %s, %d != %d".format(file.getName, currentSize, initialSize))
     if (truncate) {
       val channel = new FileOutputStream(file, true).getChannel
-      channel.truncate(initialSize)
+      try {
+        channel.truncate(initialSize)
+      } catch {
+        case ioe: java.io.IOException => println("Failed to truncate memory mapped file")
+      }
       channel.close()
     }
   }

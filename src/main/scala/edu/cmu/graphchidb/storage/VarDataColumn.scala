@@ -107,6 +107,7 @@ class VarDataColumn(name: String,  filePrefix: String, indexing: DatabaseIndexin
     lock.writeLock().lock()
     try {
       val dataFile = new File(partialFileName(currentBufferPartId))
+      
       val logOutput = new FileOutputStream(dataFile, true)
       logOutput.write(buffer.toByteArray)
       logOutput.close()
